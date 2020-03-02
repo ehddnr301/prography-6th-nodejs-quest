@@ -82,3 +82,19 @@ export const updateComment = async (req, res) => {
     console.log(error);
   }
 };
+
+export const removeComment = async (req, res) => {
+  const {
+    params: { commentId }
+  } = req;
+
+  try {
+    await Comment.findOneAndRemove({ _id: commentId });
+    res
+      .status(200)
+      .json({ msg: "success" })
+      .end();
+  } catch (error) {
+    console.log(error);
+  }
+};
