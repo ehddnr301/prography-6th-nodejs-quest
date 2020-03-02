@@ -18,6 +18,4 @@ toDoRouter.put("/:todoId", updateTodo);
 toDoRouter.put("/:todoId/complete", completeTodo);
 toDoRouter.delete("/:todoId", removeTodo);
 
-toDoRouter.use("/:todoId/comments", commentRouter);
-
 export default toDoRouter;
