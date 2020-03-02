@@ -23,3 +23,11 @@
 - because it returns the document itself, not a result object.
 - 이것을 해결하기위해서는 new option을 추가해야 합니다.
 - should set the new option to true to return the document after update was applied.
+
+# completeTodo
+
+- test에서 빠져있어서 추가 해주었습니다.
+
+# getComment
+
+- filter가 조건을 통과하는 새로운 array를 생성해 반환하기때문에 ...comment로 작성하였습니다.
