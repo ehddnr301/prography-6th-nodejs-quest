@@ -87,3 +87,18 @@ export const completeTodo = async (req, res) => {
     console.log(error);
   }
 };
+
+export const removeTodo = async (req, res) => {
+  const {
+    params: { todoId }
+  } = req;
+  try {
+    await Todo.findOneAndRemove({ _id: todoId });
+    res
+      .status(200)
+      .json({ msg: "success" })
+      .end();
+  } catch (error) {
+    console.log(error);
+  }
+};
