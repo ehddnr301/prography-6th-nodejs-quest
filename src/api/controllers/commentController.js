@@ -40,3 +40,24 @@ export const getComments = async (req, res) => {
     console.log(error);
   }
 };
+
+export const getComment = async (req, res) => {
+  const {
+    baseUrl,
+    params: { commentId }
+  } = req;
+  const todoId = getTodoId(baseUrl);
+  try {
+    const todo = await Todo.findById(todoId).populate("comments");
+    const comments = todo.comments;
+    const comment = comments.filter(c => {
+      return c._id == commentId;
+    });
+    res
+      .status(200)
+      .json(...comment)
+      .end();
+  } catch (error) {
+    console.log(error);
+  }
+};

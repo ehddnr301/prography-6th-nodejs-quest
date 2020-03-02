@@ -27,3 +27,7 @@
 # completeTodo
 
 - test에서 빠져있어서 추가 해주었습니다.
+
+# getComment
+
+- filter가 조건을 통과하는 새로운 array를 생성해 반환하기때문에 ...comment로 작성하였습니다.
