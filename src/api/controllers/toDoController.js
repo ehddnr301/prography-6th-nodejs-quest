@@ -52,8 +52,6 @@ export const updateTodo = async (req, res) => {
     params: { todoId },
     body: { title }
   } = req;
-  console.log(todoId);
-  console.log(title);
   try {
     const updateTodo = await Todo.findOneAndUpdate(
       { _id: todoId },
@@ -65,6 +63,25 @@ export const updateTodo = async (req, res) => {
     res
       .status(200)
       .json(updateTodo)
+      .end();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const completeTodo = async (req, res) => {
+  const {
+    params: { todoId }
+  } = req;
+  try {
+    const completeTodo = await Todo.findOneAndUpdate(
+      { _id: todoId },
+      { isCompleted: true },
+      { new: true }
+    );
+    res
+      .status(200)
+      .json(completeTodo)
       .end();
   } catch (error) {
     console.log(error);
