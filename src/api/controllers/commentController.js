@@ -50,12 +50,33 @@ export const getComment = async (req, res) => {
   try {
     const todo = await Todo.findById(todoId).populate("comments");
     const comments = todo.comments;
-    const comment = comments.filter(c => {
-      return c._id == commentId;
-    });
+    const comment = comments.filter(c => c._id == commentId);
     res
       .status(200)
       .json(...comment)
+      .end();
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateComment = async (req, res) => {
+  const {
+    params: { commentId },
+    body: { contents }
+  } = req;
+
+  try {
+    const updateComment = await Comment.findOneAndUpdate(
+      {
+        _id: commentId
+      },
+      { contents },
+      { new: true }
+    );
+    res
+      .status(200)
+      .json(updateComment)
       .end();
   } catch (error) {
     console.log(error);
