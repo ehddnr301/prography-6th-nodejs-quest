@@ -31,3 +31,9 @@
 # getComment
 
 - filter가 조건을 통과하는 새로운 array를 생성해 반환하기때문에 ...comment로 작성하였습니다.
+
+# searchTodo
+
+- search 기능 구현을 위해 regular expression을 사용하였습니다.
+- mongoose 에서 tags가 검색된 value를 가지고 있는 todo를 찾기위해 \$in을 사용하였습니다.
+- tags는 array형태의 검색어를 넘겨주기 때문에 object destructuring을 이용하여 해당 검색어를 모두 \$in 안에 넣어주었습니다.

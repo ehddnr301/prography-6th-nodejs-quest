@@ -41,11 +41,21 @@ export const search = req => {
   }
 };
 
-export const filter = async value => {
+export const filter = async (value, type) => {
   try {
-    return Todo.find({
-      title: { $regex: value, $options: "i" }
-    });
+    if (type === "title") {
+      return Todo.find({
+        title: { $regex: value, $options: "i" }
+      });
+    } else if (type === "description") {
+      return Todo.find({
+        description: { $regex: value, $options: "i" }
+      });
+    } else {
+      return Todo.find({
+        tags: { $in: [...value] }
+      });
+    }
   } catch (error) {
     console.log(error);
   }

@@ -24,6 +24,7 @@ export const createTodo = async (req, res) => {
 export const getTodos = async (req, res) => {
   let sortDesc;
   let searchTerm;
+  const field = Object.keys(req.query)[0];
   if (req.query !== null) {
     sortDesc = isSortDesc(req);
     searchTerm = search(req);
@@ -39,8 +40,12 @@ export const getTodos = async (req, res) => {
     } else {
       todos = await Todo.find({});
     }
-    if (searchTerm) {
-      todos = await filter(searchTerm);
+    if (field === "title") {
+      todos = await filter(searchTerm, "title");
+    } else if (field === "description") {
+      todos = await filter(searchTerm, "description");
+    } else if (field === "tags") {
+      todos = await filter(searchTerm, "tags");
     }
 
     res
