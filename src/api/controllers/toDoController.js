@@ -1,5 +1,5 @@
 import Todo from "../../models/Todo";
-import { isSortDesc } from "../../utils";
+import { isSortDesc, search, filter } from "../../utils";
 
 export const createTodo = async (req, res) => {
   const {
@@ -23,8 +23,11 @@ export const createTodo = async (req, res) => {
 
 export const getTodos = async (req, res) => {
   let sortDesc;
+  let searchTerm;
   if (req.query !== null) {
     sortDesc = isSortDesc(req);
+    searchTerm = search(req);
+    console.log(searchTerm);
   }
 
   try {
@@ -36,6 +39,10 @@ export const getTodos = async (req, res) => {
     } else {
       todos = await Todo.find({});
     }
+    if (searchTerm) {
+      todos = await filter(searchTerm);
+    }
+
     res
       .status(200)
       .json(todos)
