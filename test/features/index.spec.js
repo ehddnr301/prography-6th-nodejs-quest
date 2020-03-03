@@ -28,3 +28,6 @@ import "./Todo/completeTodo.spec";
 
 // 할일 삭제
 import "./Todo/removeTodo.spec";
+
+// 할일 정렬
+import "./Todo/orderTodo.spec";
