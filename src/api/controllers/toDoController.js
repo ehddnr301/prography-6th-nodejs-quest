@@ -1,4 +1,5 @@
 import Todo from "../../models/Todo";
+import { isSortDesc } from "../../utils";
 
 export const createTodo = async (req, res) => {
   const {
@@ -21,8 +22,20 @@ export const createTodo = async (req, res) => {
 };
 
 export const getTodos = async (req, res) => {
+  let sortDesc;
+  if (req.query !== null) {
+    sortDesc = isSortDesc(req);
+  }
+
   try {
-    const todos = await Todo.find({});
+    let todos;
+    if (sortDesc) {
+      todos = await Todo.find({}).sort({ createdAt: -1 });
+    } else if (sortDesc === false) {
+      todos = await Todo.find({}).sort({ createdAt: 1 });
+    } else {
+      todos = await Todo.find({});
+    }
     res
       .status(200)
       .json(todos)

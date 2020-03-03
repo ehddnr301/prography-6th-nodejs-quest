@@ -11,6 +11,9 @@ const app = express();
 if (process.env.NODE_ENV !== "test") {
   app.use(morgan("dev"));
 }
+
+app.get("/favicon.ico", (req, res) => res.status(204));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
