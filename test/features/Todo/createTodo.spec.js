@@ -33,5 +33,6 @@ describe("testTodo", () => {
     }
     // 첫번째 test todo id를 수정, 삭제 키로 사용
     process.env.TEST_TODO_ID = process.env.TEST_TODO_ID_0;
+    process.env.TEST_TODO_ID1 = process.env.TEST_TODO_ID_1;
   });
 });

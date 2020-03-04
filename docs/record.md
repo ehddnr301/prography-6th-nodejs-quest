@@ -41,3 +41,7 @@
 # 수정
 
 - id type은 number이어야 합니다.
+
+# validation
+
+- model에서 데이터 타입과 required를 검사하고 있어 따로 작성하지 않았습니다.
