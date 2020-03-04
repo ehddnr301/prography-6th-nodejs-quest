@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const TodoSchema = new mongoose.Schema({
+  _id: {
+    type: Number,
+    default: Date.now
+  },
   title: {
     type: String,
     required: "Tilte is required"

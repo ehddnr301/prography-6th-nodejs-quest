@@ -12,6 +12,7 @@ export const createTodo = async (req, res) => {
       description,
       tags
     });
+    console.log(todo);
     res
       .status(200)
       .json(todo)

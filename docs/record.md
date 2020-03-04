@@ -37,3 +37,7 @@
 - search 기능 구현을 위해 regular expression을 사용하였습니다.
 - mongoose 에서 tags가 검색된 value를 가지고 있는 todo를 찾기위해 \$in을 사용하였습니다.
 - tags는 array형태의 검색어를 넘겨주기 때문에 spread를 이용하여 해당 검색어를 모두 \$in 안에 넣어주었습니다.
+
+# 수정
+
+- id type은 number이어야 합니다.
