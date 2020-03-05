@@ -32,7 +32,7 @@ const TodoSchema = new mongoose.Schema(
     },
     comments: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Number,
         ref: "Comment"
       }
     ]

@@ -24,7 +24,7 @@ export const createComment = async (req, res) => {
       .json(newComment)
       .end();
   } catch (error) {
-    validationFailed(err, res);
+    validationFailed(error, res);
   }
 };
 
@@ -41,7 +41,7 @@ export const getComments = async (req, res) => {
       .json(comments)
       .end();
   } catch (error) {
-    validationFailed(err, res);
+    validationFailed(error, res);
   }
 };
 
@@ -62,7 +62,7 @@ export const getComment = async (req, res) => {
       .json(...comment)
       .end();
   } catch (error) {
-    validationFailed(err, res);
+    validationFailed(error, res);
   }
 };
 
@@ -85,7 +85,7 @@ export const updateComment = async (req, res) => {
       .json(updateComment)
       .end();
   } catch (error) {
-    validationFailed(err, res);
+    validationFailed(error, res);
   }
 };
 
@@ -101,6 +101,6 @@ export const removeComment = async (req, res) => {
       .json({ msg: "success" })
       .end();
   } catch (error) {
-    validationFailed(err, res);
+    validationFailed(error, res);
   }
 };

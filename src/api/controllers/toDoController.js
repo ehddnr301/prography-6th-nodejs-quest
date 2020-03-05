@@ -71,7 +71,7 @@ export const getTodo = async (req, res) => {
       .json(todo)
       .end();
   } catch (error) {
-    validationFailed(err, res);
+    validationFailed(error, res);
   }
 };
 
@@ -94,7 +94,7 @@ export const updateTodo = async (req, res) => {
       .json(updateTodo)
       .end();
   } catch (error) {
-    validationFailed(err, res);
+    validationFailed(error, res);
   }
 };
 
@@ -114,7 +114,7 @@ export const completeTodo = async (req, res) => {
       .json(completeTodo)
       .end();
   } catch (error) {
-    validationFailed(err, res);
+    validationFailed(error, res);
   }
 };
 
@@ -130,6 +130,6 @@ export const removeTodo = async (req, res) => {
       .json({ msg: "success" })
       .end();
   } catch (error) {
-    validationFailed(err, res);
+    validationFailed(error, res);
   }
 };
