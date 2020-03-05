@@ -1,18 +1,24 @@
 import mongoose from "mongoose";
-const CommentSchema = new mongoose.Schema({
-  contents: {
-    type: String,
-    required: "Contents is required"
+
+const CommentSchema = new mongoose.Schema(
+  {
+    contents: {
+      type: String,
+      required: "Contents is required"
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now
+    }
   },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now
+  {
+    timestamps: true
   }
-});
+);
 
 CommentSchema.set("toJSON", {
   virtuals: true,

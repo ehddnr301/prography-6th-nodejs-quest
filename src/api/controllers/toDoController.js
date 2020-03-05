@@ -28,7 +28,6 @@ export const getTodos = async (req, res) => {
   if (req.query !== null) {
     sortDesc = isSortDesc(req);
     searchTerm = search(req);
-    console.log(searchTerm);
   }
 
   try {
@@ -85,6 +84,7 @@ export const updateTodo = async (req, res) => {
         new: true
       }
     );
+    console.log(updateTodo);
     res
       .status(200)
       .json(updateTodo)
