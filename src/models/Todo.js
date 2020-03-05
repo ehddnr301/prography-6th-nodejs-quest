@@ -24,7 +24,7 @@ const TodoSchema = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now
+      default: () => Date.now() + 3600000 * 9
     },
     updatedAt: {
       type: Date,
@@ -38,7 +38,7 @@ const TodoSchema = new mongoose.Schema(
     ]
   },
   {
-    timestamps: true
+    timestamps: { currentTime: () => Date.now() + 3600000 * 9 }
   }
 );
 
