@@ -14,7 +14,10 @@ const TodoSchema = new mongoose.Schema(
       type: String,
       required: "Description is required"
     },
-    tags: Array,
+    tags: {
+      type: Array,
+      required: "tags are required"
+    },
     isCompleted: {
       type: Boolean,
       default: false
