@@ -1,4 +1,5 @@
 import Todo from "../../models/Todo";
+import Comment from "../../models/Comment";
 import { isSortDesc, search, filter, validationFailed } from "../../utils";
 
 export const createTodo = async (req, res) => {
@@ -124,6 +125,14 @@ export const removeTodo = async (req, res) => {
   } = req;
 
   try {
+    // Todo를 지우면 Comment도 지워지도록 구현
+    const { comments } = await Todo.findById({ _id: todoId }).populate(
+      "comments"
+    );
+    comments.forEach(
+      async comment => await Comment.findOneAndRemove({ _id: comment.id })
+    );
+
     await Todo.findOneAndRemove({ _id: todoId });
     res
       .status(200)
