@@ -1,5 +1,5 @@
 import Todo from "../../models/Todo";
-import { isSortDesc, search, filter } from "../../utils";
+import { isSortDesc, search, filter, validationFailed } from "../../utils";
 
 export const createTodo = async (req, res) => {
   const {
@@ -17,7 +17,7 @@ export const createTodo = async (req, res) => {
       .json(todo)
       .end();
   } catch (error) {
-    console.log(error);
+    validationFailed(error, res);
   }
 };
 
@@ -25,6 +25,7 @@ export const getTodos = async (req, res) => {
   let sortDesc;
   let searchTerm;
   const field = Object.keys(req.query)[0];
+
   if (req.query !== null) {
     sortDesc = isSortDesc(req);
     searchTerm = search(req);
@@ -32,6 +33,7 @@ export const getTodos = async (req, res) => {
 
   try {
     let todos;
+
     if (sortDesc) {
       todos = await Todo.find({}).sort({ createdAt: -1 });
     } else if (sortDesc === false) {
@@ -39,6 +41,7 @@ export const getTodos = async (req, res) => {
     } else {
       todos = await Todo.find({});
     }
+
     if (field === "title") {
       todos = await filter(searchTerm, "title");
     } else if (field === "description") {
@@ -60,6 +63,7 @@ export const getTodo = async (req, res) => {
   const {
     params: { todoId }
   } = req;
+
   try {
     const todo = await Todo.findById({ _id: todoId });
     res
@@ -67,7 +71,7 @@ export const getTodo = async (req, res) => {
       .json(todo)
       .end();
   } catch (error) {
-    console.log(error);
+    validationFailed(err, res);
   }
 };
 
@@ -76,6 +80,7 @@ export const updateTodo = async (req, res) => {
     params: { todoId },
     body: { title }
   } = req;
+
   try {
     const updateTodo = await Todo.findOneAndUpdate(
       { _id: todoId },
@@ -84,13 +89,12 @@ export const updateTodo = async (req, res) => {
         new: true
       }
     );
-    console.log(updateTodo);
     res
       .status(200)
       .json(updateTodo)
       .end();
   } catch (error) {
-    console.log(error);
+    validationFailed(err, res);
   }
 };
 
@@ -98,6 +102,7 @@ export const completeTodo = async (req, res) => {
   const {
     params: { todoId }
   } = req;
+
   try {
     const completeTodo = await Todo.findOneAndUpdate(
       { _id: todoId },
@@ -109,7 +114,7 @@ export const completeTodo = async (req, res) => {
       .json(completeTodo)
       .end();
   } catch (error) {
-    console.log(error);
+    validationFailed(err, res);
   }
 };
 
@@ -117,6 +122,7 @@ export const removeTodo = async (req, res) => {
   const {
     params: { todoId }
   } = req;
+
   try {
     await Todo.findOneAndRemove({ _id: todoId });
     res
@@ -124,6 +130,6 @@ export const removeTodo = async (req, res) => {
       .json({ msg: "success" })
       .end();
   } catch (error) {
-    console.log(error);
+    validationFailed(err, res);
   }
 };

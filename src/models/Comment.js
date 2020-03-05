@@ -2,6 +2,10 @@ import mongoose from "mongoose";
 
 const CommentSchema = new mongoose.Schema(
   {
+    _id: {
+      type: Number,
+      default: Date.now
+    },
     contents: {
       type: String,
       required: "Contents is required"
@@ -16,7 +20,7 @@ const CommentSchema = new mongoose.Schema(
     }
   },
   {
-    timestamps: true
+    timestamps: { currentTime: () => Date.now() + 3600000 * 9 }
   }
 );
 
