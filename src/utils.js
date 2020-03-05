@@ -60,3 +60,18 @@ export const filter = async (value, type) => {
     console.log(error);
   }
 };
+
+export const validationFailed = (err, res) => {
+  const { name, _message: message } = err;
+  if (name === "ValidationError") {
+    res
+      .status(400)
+      .json(message)
+      .end();
+  } else if (name === "CastError") {
+    res
+      .status(404)
+      .json("Page Not Found")
+      .end();
+  }
+};

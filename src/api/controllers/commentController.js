@@ -1,5 +1,6 @@
 import Todo from "../../models/Todo";
 import Comment from "../../models/Comment";
+import { validationFailed } from "../../utils";
 
 const getTodoId = base => base.split("/")[2];
 
@@ -8,6 +9,7 @@ export const createComment = async (req, res) => {
     baseUrl,
     body: { contents }
   } = req;
+
   const todoId = getTodoId(baseUrl);
 
   try {
@@ -22,13 +24,15 @@ export const createComment = async (req, res) => {
       .json(newComment)
       .end();
   } catch (error) {
-    console.log(error);
+    validationFailed(error, res);
   }
 };
 
 export const getComments = async (req, res) => {
   const { baseUrl } = req;
+
   const todoId = getTodoId(baseUrl);
+
   try {
     const todo = await Todo.findById(todoId).populate("comments");
     const comments = todo.comments;
@@ -37,7 +41,7 @@ export const getComments = async (req, res) => {
       .json(comments)
       .end();
   } catch (error) {
-    console.log(error);
+    validationFailed(error, res);
   }
 };
 
@@ -46,7 +50,9 @@ export const getComment = async (req, res) => {
     baseUrl,
     params: { commentId }
   } = req;
+
   const todoId = getTodoId(baseUrl);
+
   try {
     const todo = await Todo.findById(todoId).populate("comments");
     const comments = todo.comments;
@@ -56,7 +62,7 @@ export const getComment = async (req, res) => {
       .json(...comment)
       .end();
   } catch (error) {
-    console.log(error);
+    validationFailed(error, res);
   }
 };
 
@@ -79,7 +85,7 @@ export const updateComment = async (req, res) => {
       .json(updateComment)
       .end();
   } catch (error) {
-    console.log(error);
+    validationFailed(error, res);
   }
 };
 
@@ -95,6 +101,6 @@ export const removeComment = async (req, res) => {
       .json({ msg: "success" })
       .end();
   } catch (error) {
-    console.log(error);
+    validationFailed(error, res);
   }
 };

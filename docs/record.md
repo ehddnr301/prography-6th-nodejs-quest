@@ -45,3 +45,11 @@
 # validation
 
 - model에서 데이터 타입과 required를 검사하고 있어 따로 작성하지 않았습니다.
+
+# createdAt, updatedAt
+
+- 시간이 utc로 표시되고 있어 9시간을 더해 표시될수 있도록 수정하였습니다.
+
+# delete cascade
+
+- todo를 지우면 가지고있는 comment도 지워지도록 추가하였습니다.

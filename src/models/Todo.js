@@ -14,17 +14,14 @@ const TodoSchema = new mongoose.Schema(
       type: String,
       required: "Description is required"
     },
-    tags: {
-      type: Array,
-      required: "tags are required"
-    },
+    tags: Array,
     isCompleted: {
       type: Boolean,
       default: false
     },
     createdAt: {
       type: Date,
-      default: Date.now
+      default: () => Date.now() + 3600000 * 9
     },
     updatedAt: {
       type: Date,
@@ -32,13 +29,13 @@ const TodoSchema = new mongoose.Schema(
     },
     comments: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Number,
         ref: "Comment"
       }
     ]
   },
   {
-    timestamps: true
+    timestamps: { currentTime: () => Date.now() + 3600000 * 9 }
   }
 );
 
